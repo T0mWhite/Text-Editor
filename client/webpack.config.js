@@ -11,25 +11,25 @@ module.exports = () => {
       main: "./src/js/index.js",
       install: "./src/js/install.js",
     },
-    // Output for our bundles
+    // Output for bundles
     output: {
       filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
     },
     plugins: [
-      // Webpack plugin that generates our html file and injects our bundles.
+      // generates html file and injects bundles.
       new HtmlWebpackPlugin({
         template: "./index.html",
         title: "JATE",
       }),
 
-      // Injects our custom service worker
+      // Injects custom service worker
       new InjectManifest({
         swSrc: "./src-sw.js",
         swDest: "src-sw.js",
       }),
 
-      // Creates a manifest.json file.
+      // Creates manifest.json file.
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
@@ -60,7 +60,7 @@ module.exports = () => {
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
-          // We use babel-loader in order to use ES6.
+          // babel-loader to use ES6.
           use: {
             loader: "babel-loader",
             options: {
